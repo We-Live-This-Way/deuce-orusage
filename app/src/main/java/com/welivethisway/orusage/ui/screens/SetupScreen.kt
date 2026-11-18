@@ -13,12 +13,10 @@ import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.rememberScrollState
 import androidx.compose.foundation.text.KeyboardOptions
 import androidx.compose.foundation.verticalScroll
-import androidx.compose.material.icons.Icons
 import androidx.compose.material3.Button
 import androidx.compose.material3.CircularProgressIndicator
-import androidx.compose.material3.Icon
-import androidx.compose.material3.IconButton
 import androidx.compose.material3.MaterialTheme
+import androidx.compose.material3.OutlinedButton
 import androidx.compose.material3.OutlinedTextField
 import androidx.compose.material3.Scaffold
 import androidx.compose.material3.Text
@@ -47,7 +45,11 @@ private const val MANAGEMENT_KEYS_DOC =
 private const val MANAGEMENT_KEYS_PAGE = "https://openrouter.ai/settings/management-keys"
 
 @Composable
-fun SetupScreen(vm: AppViewModel, state: UiState) {
+fun SetupScreen(
+    vm: AppViewModel,
+    state: UiState,
+    onMistralOnly: () -> Unit = {},
+) {
     val context = LocalContext.current
     var input by remember { mutableStateOf("") }
     var visible by remember { mutableStateOf(false) }
@@ -66,6 +68,11 @@ fun SetupScreen(vm: AppViewModel, state: UiState) {
             Text(
                 "Spend and key management for your OpenRouter account.",
                 style = MaterialTheme.typography.bodyMedium,
+                color = MaterialTheme.colorScheme.onSurfaceVariant,
+            )
+            Text(
+                "by Deuce · deuce@welivethisway.com",
+                style = MaterialTheme.typography.bodySmall,
                 color = MaterialTheme.colorScheme.onSurfaceVariant,
             )
             Spacer(Modifier.height(24.dp))
@@ -148,6 +155,20 @@ fun SetupScreen(vm: AppViewModel, state: UiState) {
                         )
                     }
                 ) { Text("Read the docs") }
+            }
+
+            Spacer(Modifier.height(16.dp))
+
+            // Optional second provider. Reachable without an OpenRouter key, because someone may
+            // only want Mistral - gating it behind the other account would be arbitrary.
+            SectionCard(title = "Or use Mistral only") {
+                Text(
+                    "Mistral keys work without an OpenRouter account: the app shows the models your " +
+                        "key can reach, plus organisation spend if it is an Enterprise admin key.",
+                    style = MaterialTheme.typography.bodyMedium,
+                )
+                Spacer(Modifier.height(8.dp))
+                OutlinedButton(onClick = onMistralOnly) { Text("Connect Mistral instead") }
             }
 
             Spacer(Modifier.height(16.dp))

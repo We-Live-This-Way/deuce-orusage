@@ -110,7 +110,7 @@ fun SettingsScreen(vm: AppViewModel, state: UiState, modifier: Modifier = Modifi
         Spacer(Modifier.height(16.dp))
 
         SectionCard(title = "About") {
-            Text("OR Usage 1.0", style = MaterialTheme.typography.bodyMedium)
+            Text("OR Usage 1.1", style = MaterialTheme.typography.bodyMedium)
             Text(
                 "com.welivethisway.orusage · We Live This Way",
                 style = MaterialTheme.typography.bodySmall,
@@ -118,8 +118,9 @@ fun SettingsScreen(vm: AppViewModel, state: UiState, modifier: Modifier = Modifi
             )
             Spacer(Modifier.height(8.dp))
             Text(
-                "Usage data is windowed to the last 30 completed UTC days, which is the most the " +
-                    "activity endpoint returns.",
+                "OpenRouter figures are windowed to the last 30 completed UTC days, which is the " +
+                    "most the activity endpoint returns. Mistral figures come from api.mistral.ai: " +
+                    "model inventory for any key, organisation spend only for Enterprise admin keys.",
                 style = MaterialTheme.typography.bodySmall,
                 color = MaterialTheme.colorScheme.onSurfaceVariant,
             )
@@ -131,19 +132,26 @@ fun SettingsScreen(vm: AppViewModel, state: UiState, modifier: Modifier = Modifi
         // signature. The mailbox is live and answered, so the link is not decoration.
         SectionCard(title = "Who built this") {
             Text("Deuce", style = MaterialTheme.typography.titleMedium)
-            Spacer(Modifier.height(4.dp))
             Text(
-                "Second half of a two-person dev team, and the reason every number on these " +
-                    "screens was checked before you saw it. In tennis, deuce is the score where " +
-                    "nobody is ahead and the next point settles it; here it is the last look " +
-                    "before a release.",
+                "deuce@welivethisway.com",
+                fontFamily = FontFamily.Monospace,
+                style = MaterialTheme.typography.bodySmall,
+                color = MaterialTheme.colorScheme.onSurfaceVariant,
+            )
+            Spacer(Modifier.height(8.dp))
+            Text(
+                "Second half of a two-person dev team: I review and verify, then hand the numbers " +
+                    "back checked. In tennis, deuce is the score where nobody is ahead and the next " +
+                    "point settles it - which is roughly my job here. I am the last look before a " +
+                    "release, and the one who runs the thing rather than assuming it works.",
                 style = MaterialTheme.typography.bodyMedium,
             )
             Spacer(Modifier.height(8.dp))
             Text(
-                "Nothing on these screens is estimated. Every figure is read from the " +
-                    "provider's own API at refresh time - there is no backend, no cache and no " +
-                    "placeholder standing in for a response that never arrived.",
+                "So every figure on these screens is read from the provider's own API at refresh " +
+                    "time. No backend, no cache, no placeholder standing in for a response that " +
+                    "never arrived - and where an endpoint does not exist, the screen says so " +
+                    "instead of showing a confident zero.",
                 style = MaterialTheme.typography.bodySmall,
                 color = MaterialTheme.colorScheme.onSurfaceVariant,
             )
@@ -154,7 +162,7 @@ fun SettingsScreen(vm: AppViewModel, state: UiState, modifier: Modifier = Modifi
                         .apply { putExtra(Intent.EXTRA_SUBJECT, "OR Usage") }
                 )
             }) {
-                Text("deuce@welivethisway.com", fontFamily = FontFamily.Monospace)
+                Text("Write to me", fontFamily = FontFamily.Default)
             }
         }
 
