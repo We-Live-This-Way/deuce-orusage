@@ -125,6 +125,39 @@ fun SettingsScreen(vm: AppViewModel, state: UiState, modifier: Modifier = Modifi
             )
         }
 
+        Spacer(Modifier.height(16.dp))
+
+        // The credit line. A name, a reason and a real address - provenance rather than a
+        // signature. The mailbox is live and answered, so the link is not decoration.
+        SectionCard(title = "Who built this") {
+            Text("Deuce", style = MaterialTheme.typography.titleMedium)
+            Spacer(Modifier.height(4.dp))
+            Text(
+                "Second half of a two-person dev team, and the reason every number on these " +
+                    "screens was checked before you saw it. In tennis, deuce is the score where " +
+                    "nobody is ahead and the next point settles it; here it is the last look " +
+                    "before a release.",
+                style = MaterialTheme.typography.bodyMedium,
+            )
+            Spacer(Modifier.height(8.dp))
+            Text(
+                "Nothing on these screens is estimated. Every figure is read from the " +
+                    "provider's own API at refresh time - there is no backend, no cache and no " +
+                    "placeholder standing in for a response that never arrived.",
+                style = MaterialTheme.typography.bodySmall,
+                color = MaterialTheme.colorScheme.onSurfaceVariant,
+            )
+            Spacer(Modifier.height(8.dp))
+            TextButton(onClick = {
+                context.startActivity(
+                    Intent(Intent.ACTION_SENDTO, "mailto:deuce@welivethisway.com".toUri())
+                        .apply { putExtra(Intent.EXTRA_SUBJECT, "OR Usage") }
+                )
+            }) {
+                Text("deuce@welivethisway.com", fontFamily = FontFamily.Monospace)
+            }
+        }
+
         Spacer(Modifier.height(24.dp))
     }
 
