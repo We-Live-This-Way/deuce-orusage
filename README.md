@@ -104,14 +104,21 @@ app/src/test/java/.../MistralModelsTest.kt  12 Mistral tests
 
 ## Building
 
-This machine has no system JDK/SDK packages, so the toolchain lives in the home directory:
+Requires JDK 17 and the Android SDK (platform 35, build-tools 35.0.0). The Gradle wrapper is
+committed, so no Gradle install is needed.
 
 ```
-JAVA_HOME=/home/rakazo/.local/jdk-17.0.21+9
-ANDROID_HOME=/home/rakazo/tooling/sdk
-&lt;gradle 8.9&gt; testDebugUnitTest assembleDebug --no-daemon --max-workers=1
+git clone <repo-url> && cd deuce-orusage
+echo "sdk.dir=$ANDROID_HOME" > local.properties
+./gradlew testDebugUnitTest assembleDebug
 ```
 
-`gradle.properties` is tuned hard for a 2 GB cgroup limit: small heaps, in-process Kotlin compiler,
-one worker. Without that the dex merge gets OOM-killed mid-build. Raising those limits on a bigger
-machine is fine and will make builds much faster.
+`local.properties` is gitignored and machine-specific - it only tells Gradle where your SDK is.
+
+`gradle.properties` is deliberately tuned for a small machine: a 2 GB-equivalent heap ceiling, in-process
+Kotlin compilation and two workers. Without that the dex merge gets OOM-killed mid-build. On a larger
+machine those limits are safe to raise and will make builds considerably faster.
+
+## License
+
+MIT - see [LICENSE](LICENSE).

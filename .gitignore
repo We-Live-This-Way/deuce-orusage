@@ -4,3 +4,17 @@ local.properties
 build/
 app/build/
 *.log
+.kotlin/
+
+# Signing material — must never be committed
+*.jks
+*.keystore
+*.p12
+*.pfx
+keystore.properties
+signing.properties
+
+# IDE / OS noise
+.idea/
+*.iml
+.DS_Store
